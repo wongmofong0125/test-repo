@@ -37,11 +37,13 @@ def get_signed_url():
         file_name = data.get("fileName")
         content_type = data.get("contentType")
 
-        logger.info("PetId=%s FileName=%s ContentType=%s", pet_id, file_name, content_type)
+        logger.info("***PetId=%s FileName=%s ContentType=%s", pet_id, file_name, content_type)
 
         if not all([pet_id, file_name, content_type]):
             return jsonify({"error": "Missing required fields (petId, fileName, contentType)"}), 400
 
+        logger.info("***Passed required field check")
+        
         storage_client = storage.Client()
         bucket = storage_client.bucket(BUCKET_NAME)
 
@@ -57,12 +59,14 @@ def get_signed_url():
             expiration=datetime.timedelta(minutes=15),
             method="PUT",
             content_type=content_type,
-            credentials=credentials,
-            signer=signer,
-            service_account_email=credentials.service_account_email,
+            //credentials=credentials,
+            //signer=signer,
+            //service_account_email=credentials.service_account_email,
         )
 
-        return jsonify({"signedUrl": url, "gcsFilePath": blob_path}), 200
+        logger.info("***generated url ***")
+        return url
+        //return jsonify({"signedUrl": url, "gcsFilePath": blob_path}), 200
 
     except Exception:
         logger.exception("Error generating signed URL")
