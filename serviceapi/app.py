@@ -1,8 +1,12 @@
 import os
 import datetime
+import logging
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from google.cloud import storage
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
 
 app = Flask(__name__)
 
@@ -32,9 +36,7 @@ def get_signed_url():
         file_name = data.get("fileName")
         content_type = data.get("contentType")
 
-        print(f"PetId: {pet_id}")
-        print(f"File Name: {file_name}")
-        print(f"Content Type: {content_type}")
+        logger.info("PetId=%s FileName=%s ContentType=%s", pet_id, file_name, content_type)
 
         if not all([pet_id, file_name, content_type]):
             return jsonify({"error": "Missing required fields (petId, fileName, contentType)"}), 400
