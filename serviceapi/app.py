@@ -69,6 +69,7 @@ def get_signed_url():
 
 
     except Exception as e:
-        print(f"Error generating signed URL: {e}")
+        
+        logger.error("Error generating signed URL: %s", e)
         return jsonify({"error": "Internal server error"}), 500
 
