@@ -33,7 +33,7 @@ options:
   logging: CLOUD_LOGGING_ONLY
 
 substitutions:
-  _SERVICE_NAME: 'serviceapi'
+  _SERVICE_NAME: 'test-api'
   _REGION: 'europe-west1'
 
 images:
