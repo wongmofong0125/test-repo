@@ -69,9 +69,9 @@ def get_signed_url():
             access_token=credentials.token
         )
 
-        logger.info("***generated url ***")
-        return url
-        #return jsonify({"signedUrl": url, "gcsFilePath": blob_path}), 200
+        logger.info("***generated url: ", url)
+        #return url
+        return jsonify({"signedUrl": url, "gcsFilePath": blob_path}), 200
 
     except Exception:
         logger.exception("Error generating signed URL")
