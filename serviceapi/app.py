@@ -60,9 +60,7 @@ def get_signed_url():
             expiration=datetime.timedelta(minutes=15),
             method="PUT",
             content_type=content_type,
-            #credentials=credentials,
-            #signer=signer,
-            service_account_email=credentials.service_account_email,
+            service_account_email=credentials.service_account_email
         )
 
         logger.info("***generated url ***")
