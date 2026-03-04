@@ -60,8 +60,8 @@ def get_signed_url():
             expiration=datetime.timedelta(minutes=15),
             method="PUT",
             content_type=content_type,
-            //credentials=credentials,
-            //signer=signer,
+            #credentials=credentials,
+            #signer=signer,
             service_account_email=credentials.service_account_email,
         )
 
@@ -71,4 +71,4 @@ def get_signed_url():
 
     except Exception:
         logger.exception("Error generating signed URL")
-        return jsonify({"error": "Internal server error"}), 500
+        return jsonify({"error": "Internal server error"}), 999
