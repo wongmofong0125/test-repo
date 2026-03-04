@@ -53,7 +53,7 @@ def get_signed_url():
         # NEW: use IAM signer (no private key file needed)
         credentials, project_id = google.auth.default()
         
-        //signer = iam.Signer(Request(), credentials, credentials.service_account_email)
+        #signer = iam.Signer(Request(), credentials, credentials.service_account_email)
 
         url = blob.generate_signed_url(
             version="v4",
@@ -67,7 +67,7 @@ def get_signed_url():
 
         logger.info("***generated url ***")
         return url
-        //return jsonify({"signedUrl": url, "gcsFilePath": blob_path}), 200
+        #return jsonify({"signedUrl": url, "gcsFilePath": blob_path}), 200
 
     except Exception:
         logger.exception("Error generating signed URL")
