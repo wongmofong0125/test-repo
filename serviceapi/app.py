@@ -19,7 +19,7 @@ CORS(app, origins=["http://localhost:5173"])
 
 @app.route('/')
 def hello():
-    return 'Hello from Petwell!'
+    return 'Petwell test-api!'
 
 BUCKET_NAME = os.environ["BUCKET_NAME"]
 
