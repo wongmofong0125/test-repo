@@ -10,6 +10,11 @@ import google.auth
 from google.auth import iam
 from google.auth.transport.requests import Request
 
+credentials, project_id = google.auth.default()
+# CRITICAL NEW STEP: Refresh the credentials to actually generate the token
+auth_request = google.auth.transport.requests.Request()
+credentials.refresh(auth_request)
+
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
@@ -51,7 +56,7 @@ def get_signed_url():
         blob = bucket.blob(blob_path)
 
         # NEW: use IAM signer (no private key file needed)
-        credentials, project_id = google.auth.default()
+       
         
         #signer = iam.Signer(Request(), credentials, credentials.service_account_email)
 
@@ -60,7 +65,8 @@ def get_signed_url():
             expiration=datetime.timedelta(minutes=15),
             method="PUT",
             content_type=content_type,
-            service_account_email=credentials.service_account_email
+            service_account_email=credentials.service_account_email,
+            access_token=credentials.token
         )
 
         logger.info("***generated url ***")
