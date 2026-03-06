@@ -56,8 +56,6 @@ def get_signed_url():
         blob = bucket.blob(blob_path)
 
         # NEW: use IAM signer (no private key file needed)
-       
-        
         #signer = iam.Signer(Request(), credentials, credentials.service_account_email)
 
         url = blob.generate_signed_url(
@@ -69,7 +67,7 @@ def get_signed_url():
             access_token=credentials.token
         )
 
-        logger.info("***generated url: ", url)
+        logger.info("***generated url: %s", url)
         #return url
         return jsonify({"signedUrl": url, "gcsFilePath": blob_path}), 200
 
