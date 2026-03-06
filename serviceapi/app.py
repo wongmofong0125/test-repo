@@ -23,7 +23,7 @@ logger.debug("DEBUG: test-api finished imports...")
 app = Flask(__name__)
 logger.debug("DEBUG: test-api Flask object created...")
 
-#CORS(app, origins=["http://localhost:5173"])
+CORS(app, origins=["http://localhost:5173"])
 
 @app.route('/')
 def hello():
@@ -33,6 +33,7 @@ credentials, project_id = google.auth.default()
 # CRITICAL NEW STEP: Refresh the credentials to actually generate the token
 auth_request = google.auth.transport.requests.Request()
 credentials.refresh(auth_request)
+logger.debug("DEBUG: test-api After credentials refreshed...")
 
 BUCKET_NAME = os.environ["BUCKET_NAME"]
 
