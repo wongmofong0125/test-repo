@@ -1,7 +1,4 @@
-logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO)
-logger.debug("DEBUG: test-api starting imports...")
-
+print ("DEBUG: test-api starting imports...")
 import os
 import datetime
 import logging
@@ -14,16 +11,16 @@ import google.auth
 from google.auth import iam
 from google.auth.transport.requests import Request
 
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
 logger.debug("DEBUG: test-api finished imports...")
 
-
-#logger = logging.getLogger(__name__)
-#logging.basicConfig(level=logging.INFO)
-
 app = Flask(__name__)
+
 logger.debug("DEBUG: test-api Flask object created...")
 
-CORS(app, origins=["http://localhost:5173"])
+#CORS(app, origins=["http://localhost:5173"])
 
 @app.route('/')
 def hello():
