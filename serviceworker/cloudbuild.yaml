@@ -33,7 +33,7 @@ options:
   logging: CLOUD_LOGGING_ONLY
 
 substitutions:
-  _SERVICE_NAME: 'serviceworker'
+  _SERVICE_NAME: 'test-worker'
   _REGION: 'europe-west1'
 
 images:
