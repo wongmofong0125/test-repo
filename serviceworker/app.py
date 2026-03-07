@@ -6,4 +6,4 @@ app.register_blueprint(pubsub_bp)
 
 @app.get("/")
 def hello():
-    return "Hello from Petwell!"
+    return "Hello from test-worker!"
