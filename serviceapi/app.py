@@ -115,10 +115,11 @@ def get_signed_url():
             # Prepare the SQL Insert
             insert_stmt = sqlalchemy.text("""
                 INSERT INTO app_user (id, firebase_uid, email) 
-                VALUES (1, 'wongmofong', 'wongmofong.gmail.com))
-                #VALUES (1, gen_random_uuid(), credentials, credentials.service_account_email))
+                VALUES (1, 'wongmofong', 'wongmofong.gmail.com'))
+               
             """)
-            
+            #VALUES (1, gen_random_uuid(), credentials, credentials.service_account_email))
+         
             # Execute it safely using parameterized variables
             db_conn.execute(insert_stmt)
             db_conn.commit()
