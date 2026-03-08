@@ -115,18 +115,15 @@ def get_signed_url():
             # Prepare the SQL Insert
             insert_stmt = sqlalchemy.text("""
                 INSERT INTO medical_records (id, pet_id, blob_path, status) 
-                VALUES ("record1", "Gup1", "xxxpath", "new")
+                VALUES ('record1', 'Gup1', 'xxxpath', 'new')
             """)
             
             # Execute it safely using parameterized variables
-            db_conn.execute(insert_stmt, parameters={
-                "id": "record1",
-                "pet_id": "Gup1",
-                "blob_path": "xxxpath",
-                "status": "new" # Postgres loves JSON strings for lists
-            })
+            db_conn.execute(insert_stmt)
             db_conn.commit()
-            
+
+        db_conn.commit()
+
         print("Successfully saved AI summary to Cloud SQL!")
 
         
