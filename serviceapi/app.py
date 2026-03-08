@@ -109,23 +109,23 @@ def get_signed_url():
             # Extract pet_id from the file path (e.g., 'medical_records/pet_1/RyanPhoto.jpg' -> 'pet_1')
            # pet_id = file_name.split("/")[1]
             
-            with db_pool.connect() as db_conn:
-                # Prepare the SQL Insert
-                insert_stmt = sqlalchemy.text("""
-                    INSERT INTO medical_records (id, pet_id, blob_path, status) 
-                    VALUES ("record1", "Gup1", "xxxpath", "new")
-                """)
-                
-                # Execute it safely using parameterized variables
-                db_conn.execute(insert_stmt, parameters={
-                    "id": "record1",
-                    "pet_id": "Gup1",
-                    "blob_path": "xxxpath",
-                    "status": "new" # Postgres loves JSON strings for lists
-                })
-                db_conn.commit()
-                
-            print("Successfully saved AI summary to Cloud SQL!")
+        with db_pool.connect() as db_conn:
+            # Prepare the SQL Insert
+            insert_stmt = sqlalchemy.text("""
+                INSERT INTO medical_records (id, pet_id, blob_path, status) 
+                VALUES ("record1", "Gup1", "xxxpath", "new")
+            """)
+            
+            # Execute it safely using parameterized variables
+            db_conn.execute(insert_stmt, parameters={
+                "id": "record1",
+                "pet_id": "Gup1",
+                "blob_path": "xxxpath",
+                "status": "new" # Postgres loves JSON strings for lists
+            })
+            db_conn.commit()
+            
+        print("Successfully saved AI summary to Cloud SQL!")
 
         
         #return url
