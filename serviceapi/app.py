@@ -114,8 +114,9 @@ def get_signed_url():
         with db_pool.connect() as db_conn:
             # Prepare the SQL Insert
             insert_stmt = sqlalchemy.text("""
-                INSERT INTO medical_records (id, pet_id, blob_path, status) 
-                VALUES (gen_random_uuid(), gen_random_uuid(), 'xxxpath', 'new')
+                INSERT INTO app_user (id, firebase_uid, email) 
+                VALUES (1, 'wongmofong', 'wongmofong.gmail.com))
+                #VALUES (1, gen_random_uuid(), credentials, credentials.service_account_email))
             """)
             
             # Execute it safely using parameterized variables
