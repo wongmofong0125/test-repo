@@ -1,6 +1,6 @@
 Flask==3.0.0
 gunicorn==21.2.0
-vertexai==1.14.0
+vertexai==1.102.0
 google-cloud-sql-connector==1.4.0
 pg8000==1.30.3
 SQLAlchemy==2.0.25
