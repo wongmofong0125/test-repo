@@ -115,7 +115,7 @@ def get_signed_url():
             # Prepare the SQL Insert
             insert_stmt = sqlalchemy.text("""
                 INSERT INTO medical_records (id, pet_id, blob_path, status) 
-                VALUES ('record1', 'Gup1', 'xxxpath', 'new')
+                VALUES (gen_random_uuid(), gen_random_uuid(), 'xxxpath', 'new')
             """)
             
             # Execute it safely using parameterized variables
