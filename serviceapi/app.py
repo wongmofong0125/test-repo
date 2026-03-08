@@ -11,6 +11,8 @@ import google.auth
 from google.auth import iam
 from google.auth.transport.requests import Request
 
+import sqlalchemy
+from google.cloud.sql.connector import Connector, IPTypes
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
