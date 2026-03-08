@@ -57,8 +57,8 @@ def init_connection_pool() -> sqlalchemy.engine.Engine:
     return sqlalchemy.create_engine(
         "postgresql+pg8000://",
         creator=getconn,
-        pool_size=5,
-        max_overflow=2,
+        pool_size=1,
+        max_overflow=1,
     )
 
 db_pool = init_connection_pool()
