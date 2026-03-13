@@ -4,4 +4,10 @@ vertexai==1.46.0
 cloud-sql-python-connector~=1.0
 pg8000==1.30.3
 SQLAlchemy==2.0.25
+
+# For the web server/handler
+functions-framework==3.* # For creating the Cloud Task
 google-cloud-tasks==2.16.0
+
+# If you are also reading/checking the file in the bucket before enqueuing
+#google-cloud-storage==2.14.0
