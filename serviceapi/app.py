@@ -110,25 +110,22 @@ def get_signed_url():
          # --- STEP B: SAVE TO POSTGRES ---
             # Extract pet_id from the file path (e.g., 'medical_records/pet_1/RyanPhoto.jpg' -> 'pet_1')
            # pet_id = file_name.split("/")[1]
-            
-        with db_pool.connect() as db_conn:
-            # Prepare the SQL Insert
+
+        # Prepare the SQL Insert with an Upsert (Conflict) check
             insert_stmt = sqlalchemy.text("""
                 INSERT INTO app_user (id, firebase_uid, email) 
-                VALUES (gen_random_uuid(), 'wongmofong', 'wongmofong.gmail.com')
-               
+                VALUES (gen_random_uuid(), :uid, :email)
+                ON CONFLICT (firebase_uid) DO NOTHING
             """)
-            #VALUES (1, gen_random_uuid(), credentials, credentials.service_account_email))
-         
-            # Execute it safely using parameterized variables
-            db_conn.execute(insert_stmt)
+            
+            # Execute using parameters to prevent SQL injection
+            db_conn.execute(insert_stmt, {
+                "uid": "wongmofong", 
+                "email": "wongmofong.gmail.com"
+            })
             db_conn.commit()
+            print("Successfully saved AI summary to Cloud SQL!")
 
-        db_conn.commit()
-
-        print("Successfully saved AI summary to Cloud SQL!")
-
-        
         #return url
         return jsonify({"signedUrl": url, "gcsFilePath": blob_path}), 200
 
