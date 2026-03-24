@@ -74,7 +74,8 @@ def get_signed_url():
             return jsonify({"error": "Unauthorized: Missing or invalid token"}), 401
 
         token = auth_header.split("Bearer ")[1]
-
+        uid = decoded_token.get('uid')
+        email = decoded_token.get('email')
         data = request.get_json()
         pet_id = data.get("petId")
         file_name = data.get("fileName")
@@ -120,8 +121,8 @@ def get_signed_url():
             
             # Execute using parameters to prevent SQL injection
             db_conn.execute(insert_stmt, {
-                "uid": "wongmofong", 
-                "email": "wongmofong.gmail.com"
+                "uid": :uid, 
+                "email": :email
             })
             db_conn.commit()
             print("Successfully saved AI summary to Cloud SQL!")
