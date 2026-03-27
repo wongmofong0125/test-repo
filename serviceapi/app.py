@@ -7,9 +7,17 @@ from flask_cors import CORS
 from google.cloud import storage
 
 # ADD these imports
-import google.auth
-from google.auth import iam
-from google.auth.transport.requests import Request
+#import google.auth
+#from google.auth import iam
+#from google.auth.transport.requests import Request
+
+#use firebase auth
+import firebase_admin
+from firebase_admin import auth, credentials
+
+# Initialize Firebase Admin SDK
+# pick up the environment's credentials
+default_app = firebase_admin.initialize_app()
 
 import sqlalchemy
 from google.cloud.sql.connector import Connector, IPTypes
@@ -74,8 +82,15 @@ def get_signed_url():
             return jsonify({"error": "Unauthorized: Missing or invalid token"}), 401
 
         token = auth_header.split("Bearer ")[1]
-        uid = decoded_token.get('uid')
-        email = decoded_token.get('email')
+
+        try:
+            decoded_token = auth.verify_id_token(token)
+            uid = decoded_token.get('uid')
+            email = decoded_token.get('email')
+        except Exception as e:
+            logger.error("Token verification failed: %s", e)
+            return jsonify({"error": "Invalid token"}), 401
+    
         data = request.get_json()
         pet_id = data.get("petId")
         file_name = data.get("fileName")
@@ -121,8 +136,8 @@ def get_signed_url():
             
             # Execute using parameters to prevent SQL injection
             db_conn.execute(insert_stmt, {
-                "uid": :uid, 
-                "email": :email
+                "uid": uid, 
+                "email": email
             })
             db_conn.commit()
             print("Successfully saved AI summary to Cloud SQL!")
